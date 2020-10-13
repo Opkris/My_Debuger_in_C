@@ -7,45 +7,18 @@
 #define __FILE__
 #define __LINE__
 
-
-typedef struct date Date;
-typedef struct hour Hour;
-
-struct hour{
-
-    int hour;
-    int minute;
-    int second;
-
-};
-
-struct date{
-
-    int day;
-    int month;
-    int year;
-    Hour hour;
-
-};
-
 void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const char *pszFormat, ...){
 
     static int iCounter = 0;
-    FILE * fLogFile;
     iCounter ++;
+    FILE * fLogFile;
+    time_t tTimeAndDate;
     int iMaxlen = 256 - 1;
     va_list vaArgumentPointer;
-    char szOutputString[256] = {0};
-    char *pszType= (ulErrorType==1)?"Error:":"Debug:";
-
-    //================Set local time in file name =================
-    time_t tTimeAndDate;
-    struct tm * timeinfo;
-    time ( &tTimeAndDate );
-    timeinfo = localtime ( &tTimeAndDate );
-    //=============================================================
 
     char szFileName[256] = {0};
+    char szOutputString[256] = {0};
+    char *pszType= (ulErrorType==1)?"Error:":"Debug:";
 
     if (fLogFile == NULL){
 
@@ -57,18 +30,7 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const
         vsnprintf(szOutputString, iMaxlen, pszFormat, vaArgumentPointer);
         va_end(vaArgumentPointer);
 
-
-
         fprintf(fLogFile, "%04i: %s %s, line: %i from %s\n", iCounter, pszType, szOutputString, iLine, szFile);
     }
-
-    /*
-    if( fLogFile != NULL) {
-        va_start(vaArgumentPointer, pszFormat);
-        vsnprintf(szOutputString, iMaxlen, pszFormat, vaArgumentPointer);
-        va_end(vaArgumentPointer);
-    */
-
-
     return;
 }
