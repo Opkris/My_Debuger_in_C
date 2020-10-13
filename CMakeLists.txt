@@ -3,4 +3,4 @@ project(Debug C)
 
 set(CMAKE_C_STANDARD 11)
 
-add_executable(Debug main.c pgdbglog.c pgdbglog.h)
+add_executable(Debug opdebugger.c pgdbglog.c pgdbglog.h)

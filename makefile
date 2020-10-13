@@ -10,13 +10,13 @@ OBJDIR = obj
 _DEPS = pgdbglog.h
 DEPS = $(patsubst %, $(INCLDIR)/%,$(_DEPS))
 
-_OBJS = pgdbglog.o main.o
+_OBJS = pgdbglog.o opdebugger.o
 OBJS = $(patsubst %,$(OBJDIR)/%,$(_OBJS))
 
 $(OBJDIR)/%.o: %.c $(DEPS)
 	$(CC) -c -o $@ $< $(CFLAGS)
 
-main: $(OBJS)
+opdebugger: $(OBJS)
 	gcc -o $@ $^ $(CFLAGS)
 
 .PHONY: clean
