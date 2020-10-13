@@ -1,6 +1,6 @@
 #include <stdio.h>
 #include <stdlib.h>
-#include "pgdbglog.h"
+#include "include/pgdbglog.h"
 
 int glob_bTraceEnabled = 1;
 

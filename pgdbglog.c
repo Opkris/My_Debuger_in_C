@@ -11,7 +11,7 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const
 
     static int iCounter = 0;
     iCounter ++;
-    FILE * fLogFile;
+    FILE *fLogFile = NULL;
     time_t tTimeAndDate;
     int iMaxlen = 256 - 1;
     va_list vaArgumentPointer;
@@ -23,7 +23,7 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const
     if (fLogFile == NULL){
 
         tTimeAndDate= time(NULL);
-        snprintf(szFileName,iMaxlen,"debug_%i.txt",tTimeAndDate);
+        snprintf(szFileName,iMaxlen,"debug_%li.txt",tTimeAndDate);
         fLogFile = fopen(szFileName, "w");
 
         va_start(vaArgumentPointer, pszFormat);
