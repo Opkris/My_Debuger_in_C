@@ -8,7 +8,25 @@
 #define __LINE__
 
 
-const char *make_temp_name();
+typedef struct date Date;
+typedef struct hour Hour;
+
+struct hour{
+
+    int hour;
+    int minute;
+    int second;
+
+};
+
+struct date{
+
+    int day;
+    int month;
+    int year;
+    Hour hour;
+
+};
 
 void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const char *pszFormat, ...){
 
@@ -31,15 +49,15 @@ void PgDbgLogger(unsigned long ulErrorType, int iLine, const char *szFile, const
 
     if (fLogFile == NULL){
 
-        tTimeAndDate = time(NULL);
-        snprintf(szFileName, iMaxlen,"debug_%s.txt",asctime (timeinfo));
-
+        tTimeAndDate= time(NULL);
+        snprintf(szFileName,iMaxlen,"debug_%i.txt",tTimeAndDate);
         fLogFile = fopen(szFileName, "w");
-
 
         va_start(vaArgumentPointer, pszFormat);
         vsnprintf(szOutputString, iMaxlen, pszFormat, vaArgumentPointer);
         va_end(vaArgumentPointer);
+
+
 
         fprintf(fLogFile, "%04i: %s %s, line: %i from %s\n", iCounter, pszType, szOutputString, iLine, szFile);
     }
