@@ -2,7 +2,7 @@
 #include <stdlib.h>
 #include "pgdbglog.h"
 
-int glob_bTraceEnabled = 0;
+int glob_bTraceEnabled = 1;
 
 int main() {
     int ulBytes = 12;

@@ -1,1 +1,0 @@
-0001: Error: malloc failed to allocate 12 bytes, line: 14 from main.c
